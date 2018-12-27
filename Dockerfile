@@ -11,7 +11,7 @@ RUN apk update && apk --no-cache add bash curl openssl
 RUN /usr/bin/curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | /bin/bash
 RUN /usr/local/bin/helm init --client-only && \
     /usr/local/bin/helm repo remove local && \
-    /usr/local/bin/helm repo remove add local  https://kubernetes-charts.storage.googleapis.com
+    /usr/local/bin/helm repo add local https://kubernetes-charts.storage.googleapis.com
 
 COPY . $SOURCE_DIR
 RUN mkdir -p $ARCHIVES_DIR
