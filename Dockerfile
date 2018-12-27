@@ -17,7 +17,7 @@ RUN mkdir -p $ARCHIVES_DIR
 RUN for d in $(ls $SOURCE_DIR/stable); \
     do \
         if test -f $SOURCE_DIR/stable/$d/requirements.yaml;then \
-            /usr/local/bin/helm dep build $SOURCE_DIR/stable/$d; \
+            /usr/local/bin/helm dep update $SOURCE_DIR/stable/$d; \
         fi \
     done
 
