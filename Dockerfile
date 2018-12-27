@@ -9,14 +9,22 @@ ARG ARCHIVES_DIR
 
 RUN apk update && apk --no-cache add bash curl openssl
 RUN /usr/bin/curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | /bin/bash
+RUN /usr/local/bin/helm init --client-only
 
 COPY . $SOURCE_DIR
 RUN mkdir -p $ARCHIVES_DIR
-RUN for d in $(ls $SOURCE_DIR); \
+
+RUN for d in $(ls $SOURCE_DIR/stable); \
     do \
-        if test -d $SOURCE_DIR/$d;then \
-            echo $SOURCE_DIR/$d &&  \
-            /usr/local/bin/helm package -u -d $ARCHIVES_DIR --save=false $SOURCE_DIR/$d; \
+        if test -f $SOURCE_DIR/stable/$d/requirements.yaml;then \
+            /usr/local/bin/helm dep build $SOURCE_DIR/stable/$d; \
+        fi \
+    done
+
+RUN for d in $(ls $SOURCE_DIR/stable); \
+    do \
+        if test -d $SOURCE_DIR/stable/$d;then \
+            /usr/local/bin/helm package -u -d $ARCHIVES_DIR --save=false $SOURCE_DIR/stable/$d; \
         fi \
     done
 

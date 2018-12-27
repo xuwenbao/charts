@@ -1,0 +1,4 @@
+charts:
+  build:
+    image: xuwenbao/charts
+    dockerfile: Dockerfile
