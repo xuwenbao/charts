@@ -29,7 +29,7 @@ MAINTAINER Wenbao Xu<xu-wenbao@foxmail.com>
 
 ARG ARCHIVES_DIR
 ENV ARCHIVES_DIR $ARCHIVES_DIR
-ENV SERVER_URL http://127.0.0.1:8879/charts
+ENV SERVER_URL http://127.0.0.1:8879
 
 COPY --from=builder $ARCHIVES_DIR $ARCHIVES_DIR
 COPY --from=builder /usr/local/bin/helm /usr/local/bin/
