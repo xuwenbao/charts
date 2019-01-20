@@ -36,3 +36,4 @@ Session.vim
 
 *.aes
 dockercfg
+.history

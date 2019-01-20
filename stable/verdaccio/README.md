@@ -47,14 +47,15 @@ deletes the release.
 
 ## Configuration
 
-The following tables lists the configurable parameters of the Verdaccio chart
+The following table lists the configurable parameters of the Verdaccio chart
 and their default values.
 
 | Parameter                          | Description                                                     | Default                                                  |
 | ---------------------------------- | --------------------------------------------------------------- | -------------------------------------------------------- |
 | `customConfigMap`                  | Use a custom ConfigMap                                          | `false`                                                  |
-| `image.pullPolicy`                 | Image pull policy                                               | `Always` if `image` tag is `latest`, else `IfNotPresent` |
-| `image.repository`                 | Verdaccio image                                                 | `verdaccio/verdaccio:{VERSION}`                          |
+| `image.pullPolicy`                 | Image pull policy                                               | `IfNotPresent`                                           |
+| `image.repository`                 | Verdaccio container image repository                            | `verdaccio/verdaccio`                                    |
+| `image.tag`                        | Verdaccio container image tag                                   | `3.10.0`                                                 |
 | `nodeSelector`                     | Node labels for pod assignment                                  | `{}`                                                     |
 | `persistence.accessMode`           | PVC Access Mode for Verdaccio volume                            | `ReadWriteOnce`                                          |
 | `persistence.enabled`              | Enable persistence using PVC                                    | `true`                                                   |
@@ -72,6 +73,7 @@ and their default values.
 | `service.loadBalancerIP`           | IP address to assign to load balancer (if supported)            | `""`                                                     |
 | `service.loadBalancerSourceRanges` | List of IP CIDRs allowed access to load balancer (if supported) | `[]`                                                     |
 | `service.port`                     | Service port to expose                                          | `4873`                                                   |
+| `service.nodePort`                 | Service port to expose                                          | none                                                     |
 | `service.type`                     | Type of service to create                                       | `ClusterIP`                                              |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
@@ -82,7 +84,7 @@ $ helm install --name my-release \
     stable/verdaccio
 ```
 
-The above command sets the a service type LoadBalancer.
+The above command sets the service type LoadBalancer.
 
 Alternatively, a YAML file that specifies the values for the above parameters
 can be provided while installing the chart. For example,
