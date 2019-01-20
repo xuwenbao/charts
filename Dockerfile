@@ -29,10 +29,10 @@ MAINTAINER Wenbao Xu<xu-wenbao@foxmail.com>
 
 ARG ARCHIVES_DIR
 ENV ARCHIVES_DIR $ARCHIVES_DIR
-ENV SERVER_URL http://127.0.0.1/charts
+ENV SERVER_URL http://127.0.0.1:8879/charts
 
 COPY --from=builder $ARCHIVES_DIR $ARCHIVES_DIR
 COPY --from=builder /usr/local/bin/helm /usr/local/bin/
 
-EXPOSE 80
-CMD /usr/local/bin/helm serve --address 0.0.0.0:80 --repo-path $ARCHIVES_DIR --url $SERVER_URL
+EXPOSE 8879
+CMD /usr/local/bin/helm serve --address 0.0.0.0:8879 --repo-path $ARCHIVES_DIR --url $SERVER_URL
